@@ -81,7 +81,7 @@ capinfos -v
 ### 2. 克隆并安装项目
 
 ```powershell
-git clone https://github.com/你的用户名/pcap-mcp.git
+git clone https://github.com/jiadewoer/pcap-mcp.git
 Set-Location pcap-mcp
 
 uv sync --extra dev

@@ -5,7 +5,7 @@ description = "Secure MCP server for network packet capture analysis with tshark
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "pcap-mcp contributors" }]
+authors = [{ name = "jiadewoer" }]
 dependencies = [
     "mcp>=1.2,<2",
     "openai>=1.50,<3",
