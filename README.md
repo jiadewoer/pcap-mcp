@@ -7,6 +7,18 @@
 TCP 故障定位、RTT 分布和可疑流量线索。项目最重要的设计假设是：
 **抓包中解析出的任何文本都可能由攻击者控制，不能直接当成 AI 指令。**
 
+## 运行演示
+
+OpenAI 兼容客户端通过 stdio 连接本地 MCP Server，并成功发现 12 个 PCAP 分析工具：
+
+![客户端成功连接 12 个 PCAP 工具](docs/images/12-pcap-tools.png)
+
+### 提示注入防护
+
+测试样本的 HTTP 载荷包含指令覆盖、角色重置和 Unicode 控制字符。工具将载荷视为不可信网络数据，返回 `SECURITY WARNING`，中和危险内容，并拒绝执行其中的指令：
+
+![PCAP 提示注入检测与安全告警](docs/images/injection-defense.png)
+
 ## 项目能做什么
 
 - 用自然语言让 AI 调用本地抓包分析工具。
@@ -139,7 +151,7 @@ $env:OPENAI_MODEL = "你的模型名称"
 $env:PCAP_MCP_ALLOWED_DIRS = "D:\pcaps;D:\projects\pcap-mcp\tests\fixtures"
 $env:PCAP_MCP_REDACT = "on"
 
-python scripts\openai_mcp_client.py
+python scripts/openai_mcp_client.py
 ```
 
 终端显示以下内容即表示连接成功：
@@ -181,7 +193,7 @@ tests/fixtures/injection_demo.pcap
 可重新生成测试样本：
 
 ```powershell
-python scripts\craft_injection_pcap.py
+python scripts/craft_injection_pcap.py
 ```
 
 ## 安全模型
@@ -252,6 +264,7 @@ mypy src scripts\openai_mcp_client.py
 pcap-mcp/
 ├─ .github/workflows/ci.yml       # GitHub Actions
 ├─ docs/SECURITY.md               # 详细安全模型
+├─ docs/images/                   # README 演示截图
 ├─ scripts/
 │  ├─ craft_injection_pcap.py     # 构造安全测试抓包
 │  └─ openai_mcp_client.py        # OpenAI 兼容终端客户端
