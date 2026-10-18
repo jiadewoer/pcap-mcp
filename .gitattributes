@@ -1,0 +1,6 @@
+# Preserve bytes used by source and package SHA256 manifests on Windows.
+# Disable newline conversion; normal text diffs remain available.
+* -text
+*.pcap binary
+*.pcapng binary
+*.png binary

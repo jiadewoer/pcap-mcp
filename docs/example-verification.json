@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "capture_sha256": "b4c97c8af2c87308777a9981a1e868ff4ecc210e5528b20e0af0f203d1e7408f",
+  "capture_unchanged_during_verification": true,
+  "scope": "decoded_http_fields_and_transformations_not_intent_or_success",
+  "records": [
+    {
+      "reference": "E02/F4:http.request.method/0",
+      "matched": true,
+      "status": "matched"
+    },
+    {
+      "reference": "E02/F4:http.host/0",
+      "matched": true,
+      "status": "matched"
+    },
+    {
+      "reference": "E02/F4:http.request.uri/0",
+      "matched": true,
+      "status": "matched"
+    },
+    {
+      "reference": "E02/F4:http.user_agent/0",
+      "matched": true,
+      "status": "matched"
+    }
+  ],
+  "record_count": 4,
+  "matched_count": 4,
+  "all_records_match": true,
+  "coverage": "only_exported_field_occurrences_not_entire_capture",
+  "claims": {
+    "scope": "enumerated_field_predicates_not_arbitrary_semantic_truth",
+    "facts": [
+      {
+        "claim_id": "C01",
+        "record": "E02/F4:http.user_agent/0",
+        "property": "transformations.unicode_controls_removed",
+        "value": 0,
+        "status": "verified_field_predicate",
+        "accepted": true
+      },
+      {
+        "claim_id": "C02",
+        "record": "E02/F4:http.user_agent/0",
+        "property": "transformations.middle_dots_inserted_by_server",
+        "value": 31,
+        "status": "verified_field_predicate",
+        "accepted": true
+      }
+    ],
+    "hypotheses_are_unverified": true,
+    "unknown_hypothesis_references": [],
+    "all_facts_accepted": true
+  }
+}

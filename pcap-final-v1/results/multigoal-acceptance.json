@@ -1,0 +1,291 @@
+{
+  "additional_checks": {
+    "independent_DNS_byte_check": {
+      "NXDOMAIN_responses": 6,
+      "finite_properties_matched": 4,
+      "observed_DNS_packets": 38,
+      "query_packets": 19,
+      "unique_query_names": 14
+    },
+    "independent_HTTP_byte_check": {
+      "finite_properties_checked": 56,
+      "finite_properties_matched": 56,
+      "required_records": 8,
+      "scope": "complete ASCII HTTP/1 headers in single Ethernet IPv4 TCP packets"
+    },
+    "local_parser_diagnostic": {
+      "DNS_counts_consistent": true,
+      "HTTP_capture_TCP_conversations": 2,
+      "TLS_SNI": "localhost",
+      "TLS_capture_TCP_conversations": 2,
+      "TLS_selected_version": "0x0303",
+      "TLS_server_hello_count": 1,
+      "parser_version": "4.2.2",
+      "scope": "cross_version_diagnostic_only_no_old_proof_or_score_replacement"
+    }
+  },
+  "cases": [
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "overview-http-stop",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_http_requests"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "http-fields",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_dns_queries"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "dns-counts",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-inventory",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 20
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tcp-flows",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_valid": false,
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": false,
+      "route_schema_valid": false,
+      "saved_program_payload_parity": false,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "route_or_result_failed",
+      "task_id": "http-and-tcp",
+      "task_result_publishable": false,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "overview-dns-stop",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    },
+    {
+      "executed_tool_calls": 2,
+      "execution_audit_valid": true,
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 2,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        },
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 20
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-and-tcp",
+      "task_result_publishable": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    }
+  ],
+  "descriptive_cost": {
+    "controller_case_seconds_sum": 34.187,
+    "output_tokens": 270,
+    "prompt_tokens": 11101,
+    "scope": "includes per-case controller work; excludes global preflight; no controlled baseline latency comparison"
+  },
+  "integrity": {
+    "all_166_hashes_match": true,
+    "all_case_scores_replay": true,
+    "all_identity_and_context_receipts_replay": true,
+    "archive_CRC": "passed",
+    "isolated_runtime_modules_match_delivered_code": 23,
+    "manifest_entries": 166,
+    "no_missing_or_extra_files": true,
+    "runner_files_match_delivered_code": 11,
+    "saved_same_version_program_reextraction_match": true,
+    "three_input_hashes_match_pinned_sources": true
+  },
+  "limits": {
+    "TLS_TCP_truth_scope": "program parity and local diagnostic only, not independent semantic ground truth",
+    "adaptive_multiround_investigation_evaluated": false,
+    "automatic_AI_semantic_acceptance": false,
+    "data_scope": "three exposed development samples from one public provider",
+    "independent_production_holdout": false,
+    "model_superiority_over_rules": "not_demonstrated"
+  },
+  "model": {
+    "context_length": 8192,
+    "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "identity_scope": "pre_post_observations_not_atomic_execution_attestation",
+    "name": "qwen3:8b",
+    "ollama_version": "0.24.0",
+    "parser_version_at_execution": "Wireshark 4.6.2"
+  },
+  "next_phase": "parameter-contract controls and task-paraphrase comparison using a new fixed batch; do not rerun or regrade this batch",
+  "notes_zh": [
+    "本阶段100%指实验执行及结果核验完成；模型通过率为87.5%，不是100%。",
+    "规则8/8，模型7/8；本次未显示模型优于规则。",
+    "保留第6题失败、原始响应、调用预算及旧分数，不补调或放宽原评分。"
+  ],
+  "phase_progress_percent": 100,
+  "phase_status": "execution_and_return_validation_completed_with_one_preserved_model_failure",
+  "preserved_failure": {
+    "TCP_tool_dispatched": true,
+    "case_number": 6,
+    "complete_task_result_published": false,
+    "http_tool_dispatched": false,
+    "http_tool_name": "inspect_http_requests",
+    "interpretation": "Both tool names were selected; one call had invalid arguments. The controller correctly rejected it.",
+    "metric_note": "Original required_tools_covered=0 and selected_route=[] are the frozen all-or-nothing schema-scoring result. They do not mean the recorded TCP call was absent.",
+    "model_arguments": {
+      "fields_csv": "http.request.headers.user_agent"
+    },
+    "rejection_reason": "fields_csv is not declared by the closed HTTP-tool schema",
+    "score_unchanged": "failure",
+    "task_id": "http-and-tcp"
+  },
+  "results": {
+    "all_eight_raw_responses_complete": true,
+    "automatic_retries_in_batch_records": 0,
+    "dual_goal_tasks_passed": "1/2",
+    "executed_focused_tool_calls": 7,
+    "model_publishable_task_results": 7,
+    "model_route_and_parameter_exact": 7,
+    "new_model_attempts": 8,
+    "new_model_cap": 8,
+    "per_task_attempts": 1,
+    "rejected_focused_tool_calls": 1,
+    "requested_focused_tool_calls": 8,
+    "rules_focused_tool_calls": 8,
+    "rules_route_and_parameter_exact": 8,
+    "rules_task_result_parity": 8,
+    "single_protocol_tasks_passed": "4/4",
+    "stop_tasks_passed": "2/2"
+  },
+  "review_date_utc": "2026-10-18",
+  "run_id": "mr-20261018-v1",
+  "schema": "pcap-multigoal-independent-return-check-v1",
+  "uploaded_zip": {
+    "bytes": 262723,
+    "filename": "mr-20261018-v1.zip",
+    "sha256": "b8f17e71e4d843b978b273ab97534305b6a876714a7464d5fe06703adfde39c9"
+  }
+}

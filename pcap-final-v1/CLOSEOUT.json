@@ -1,0 +1,53 @@
+{
+  "schema": "pcap-mcp-engineering-closeout-v1",
+  "date": "2026-10-18",
+  "engineering_delivery_progress_percent": 100,
+  "status": "delivery_complete",
+  "scope": "可运行、可复核、可演示并解释的本地PCAP分析工程与有限开发对照报告",
+  "milestones": [
+    {
+      "name": "只读MCP抓包分析工具",
+      "weight_percent": 20,
+      "status": "completed"
+    },
+    {
+      "name": "字段与来源复核及拒绝边界",
+      "weight_percent": 20,
+      "status": "completed"
+    },
+    {
+      "name": "实际Ollama与预算留痕",
+      "weight_percent": 20,
+      "status": "completed"
+    },
+    {
+      "name": "多协议多目标基线对照",
+      "weight_percent": 20,
+      "status": "completed"
+    },
+    {
+      "name": "参数改写对照、统一入口、使用说明与结论整合",
+      "weight_percent": 20,
+      "status": "completed"
+    }
+  ],
+  "final_comparison": "A8/8，B8/8，冻结关键词规则4/8；没有观察到额外参数提醒增益",
+  "preserved_old_failure": "mr第6题非法HTTP参数仍按失败，旧批次7/8保持不变",
+  "new_planned_research_batch_required": false,
+  "installation_command_generates_model_calls": false,
+  "original_src_overwritten": false,
+  "old_experiment_batches_overwritten": false,
+  "root_document_update": "Install-Final.ps1 checks first, backs up existing README and START-HERE, then updates documentation",
+  "daily_modes": {
+    "check": 0,
+    "analyze": 0,
+    "agent": "maximum 1 explicitly requested model attempt per fixed RunId",
+    "report": 0,
+    "serve": "service itself makes zero model requests; external client controls its own model use"
+  },
+  "model_free_text_publication": false,
+  "automatic_semantic_acceptance": false,
+  "method_superiority_established": false,
+  "independent_production_holdout_established": false,
+  "user_next_step": "解压完成版并执行Install-Final.ps1；从START-HERE.md开始日常使用，无需回传新的研究批次。"
+}

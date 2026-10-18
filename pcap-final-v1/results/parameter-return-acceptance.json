@@ -1,0 +1,737 @@
+{
+  "automatic_semantic_acceptance": false,
+  "cases": [
+    {
+      "executed_tool_calls": 2,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_http_requests"
+        },
+        {
+          "arguments_text": "{\"protocol\": \"tcp\", \"top_n\": 1}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "list_conversations"
+        }
+      ],
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 2,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_http_requests"
+        },
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 1
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "http-tcp-explicit-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 2,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_http_requests"
+        },
+        {
+          "arguments_text": "{\"protocol\": \"tcp\", \"top_n\": 1}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "list_conversations"
+        }
+      ],
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 2,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_http_requests"
+        },
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 1
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "http-tcp-explicit-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 2,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_http_requests"
+        },
+        {
+          "arguments_text": "{\"top_n\": 1, \"protocol\": \"tcp\"}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "list_conversations"
+        }
+      ],
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 2,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_http_requests"
+        },
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 1
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "http-tcp-paraphrase-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 2,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_http_requests"
+        },
+        {
+          "arguments_text": "{\"protocol\": \"tcp\", \"top_n\": 1}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "list_conversations"
+        }
+      ],
+      "requested_tool_calls": 2,
+      "required_tool_count": 2,
+      "required_tools_covered": 2,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_http_requests"
+        },
+        {
+          "arguments": {
+            "protocol": "tcp",
+            "top_n": 1
+          },
+          "name": "list_conversations"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "http-tcp-paraphrase-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_dns_queries"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_dns_queries"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "dns-explicit-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_dns_queries"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_dns_queries"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "dns-explicit-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_dns_queries"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_dns_queries"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "dns-paraphrase-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "inspect_dns_queries"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "inspect_dns_queries"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "dns-paraphrase-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "check_tls_posture"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-explicit-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "check_tls_posture"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-explicit-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "check_tls_posture"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-paraphrase-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 1,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [
+        {
+          "arguments_text": "{}",
+          "schema_valid": true,
+          "task_parameters_exact": true,
+          "tool": "check_tls_posture"
+        }
+      ],
+      "requested_tool_calls": 1,
+      "required_tool_count": 1,
+      "required_tools_covered": 1,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [
+        {
+          "arguments": {},
+          "name": "check_tls_posture"
+        }
+      ],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "tls-paraphrase-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": false
+    },
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [],
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "stop-explicit-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    },
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [],
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "stop-explicit-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    },
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [],
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "stop-paraphrase-A",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    },
+    {
+      "executed_tool_calls": 0,
+      "execution_audit_consistent": true,
+      "execution_audit_valid": true,
+      "per_call_parameters": [],
+      "requested_tool_calls": 0,
+      "required_tool_count": 0,
+      "required_tools_covered": 0,
+      "reserved": true,
+      "route_exact": true,
+      "route_schema_valid": true,
+      "saved_program_payload_parity": true,
+      "selected_route": [],
+      "semantic_AI_review": "not_performed",
+      "status": "verified_task_result",
+      "task_id": "stop-paraphrase-B",
+      "task_result_publishable": true,
+      "tool_names_exact": true,
+      "unnecessary_selected_tools": 0,
+      "valid_stop": true
+    }
+  ],
+  "conclusions": [
+    "本批A与B均为8/8，没有观察到额外参数提醒增益。",
+    "冻结关键词规则4/8是已暴露开发任务上的结果，不能推广为总体模型优势。",
+    "该结果支持受限工具及参数选择、停止和程序输出一致性；不证明多轮规划、独立生产泛化或自动语义审阅。"
+  ],
+  "execution_parser": "Wireshark 4.6.2",
+  "experiment": {
+    "completed_input_matched_pairs": 8,
+    "conditions": {
+      "A": {
+        "by_wording": {
+          "explicit": {
+            "planned": 4,
+            "route_exact": 4
+          },
+          "paraphrase": {
+            "planned": 4,
+            "route_exact": 4
+          }
+        },
+        "completed_cells": 8,
+        "planned_goals": 8,
+        "publishable_results": 8,
+        "recorded_cells": 8,
+        "requested_tool_calls": 8,
+        "route_and_parameters_exact": 8,
+        "schema_valid_tool_calls": 8,
+        "task_exact_tool_calls": 8,
+        "tool_names_exact": 8
+      },
+      "B": {
+        "by_wording": {
+          "explicit": {
+            "planned": 4,
+            "route_exact": 4
+          },
+          "paraphrase": {
+            "planned": 4,
+            "route_exact": 4
+          }
+        },
+        "completed_cells": 8,
+        "planned_goals": 8,
+        "publishable_results": 8,
+        "recorded_cells": 8,
+        "requested_tool_calls": 8,
+        "route_and_parameters_exact": 8,
+        "schema_valid_tool_calls": 8,
+        "task_exact_tool_calls": 8,
+        "tool_names_exact": 8
+      }
+    },
+    "interpretation_scope": "single_observation_per_cell_on_exposed_development_examples; no_population_effect_or_model_superiority_claim",
+    "paired_descriptive_counts": {
+      "both_exact": 8,
+      "neither_exact": 0,
+      "only_A_exact": 0,
+      "only_B_exact": 0
+    },
+    "pairs": [
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "http-tcp-explicit",
+        "order": "AB",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "http-tcp-paraphrase",
+        "order": "BA",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "dns-explicit",
+        "order": "BA",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "dns-paraphrase",
+        "order": "AB",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "tls-explicit",
+        "order": "AB",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "tls-paraphrase",
+        "order": "BA",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "stop-explicit",
+        "order": "BA",
+        "same_inputs_except_contract_reminder": true
+      },
+      {
+        "A_completed": true,
+        "A_route_exact": true,
+        "B_completed": true,
+        "B_route_exact": true,
+        "goal_id": "stop-paraphrase",
+        "order": "AB",
+        "same_inputs_except_contract_reminder": true
+      }
+    ],
+    "planned_pairs": 8,
+    "rules_exact_unique_goals": 4,
+    "rules_unique_goals": 8
+  },
+  "identity": {
+    "details": {
+      "families": [
+        "qwen3"
+      ],
+      "family": "qwen3",
+      "format": "gguf",
+      "parameter_size": "8.2B",
+      "parent_model": "",
+      "quantization_level": "Q4_K_M"
+    },
+    "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "name": "qwen3:8b",
+    "ollama_version": "0.24.0"
+  },
+  "integrity": {
+    "all_case_scores_replayed": 16,
+    "delivered_runner_files_verified": 13,
+    "file_count": 290,
+    "isolated_runtime_modules_verified": 23,
+    "manifest_entries_verified": 289,
+    "same_version_post_reextraction": true,
+    "zip_CRC": "passed"
+  },
+  "model_prose_published": false,
+  "old_mr_result": "7/8 preserved without retry or regrading",
+  "program_checks": {
+    "DNS_counts": {
+      "NXDOMAIN_responses": 6,
+      "packets": 38,
+      "queries": 19,
+      "unique_query_names": 14
+    },
+    "DNS_independent_finite_properties": 4,
+    "HTTP_matched_occurrences_per_proof": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "HTTP_same_version_source_proofs": 4,
+    "reused_unique_HTTP_capture_count": 1
+  },
+  "results": {
+    "A_exact": "8/8",
+    "B_exact": "8/8",
+    "attempt_cap": 16,
+    "focused_tools_executed": 16,
+    "input_matched_pairs": "8/8",
+    "model_attempts": 16,
+    "nondefault_TCP_top_n": 1,
+    "parameter_schema_violations": 0,
+    "rules_exact_unique_goals": "4/8",
+    "stop_cases_correct": "4/4"
+  },
+  "review_date_utc": "2026-10-18",
+  "run_id": "pc-20261018-v1",
+  "schema": "pcap-final-parameter-return-acceptance-v1",
+  "source_zip": {
+    "bytes": 393098,
+    "filename": "pc-20261018-v1.zip",
+    "sha256": "9f1db773072628f144e41f4728e85520b25e99756fdcd8c10abc20139a7f6014"
+  }
+}

@@ -1,6 +1,6 @@
 [project]
 name = "pcap-mcp"
-version = "0.1.0"
+version = "0.8.0"
 description = "Secure MCP server for network packet capture analysis with tshark"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -8,21 +8,25 @@ license = { text = "MIT" }
 authors = [{ name = "jiadewoer" }]
 dependencies = [
     "mcp>=1.2,<2",
-    "openai>=1.50,<3",
     "pydantic>=2.6",
+    "jsonschema>=4.20,<5",
 ]
 
 [project.optional-dependencies]
+client = ["openai>=1.50,<3"]
 dev = [
+    "openai>=1.50,<3",
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "ruff>=0.4",
     "mypy>=1.10",
-    "scapy>=2.5",
 ]
 
 [project.scripts]
 pcap-mcp = "pcap_mcp.server:main"
+pcap-mcp-agent = "pcap_mcp.agent:main"
+pcap-mcp-baseline = "pcap_mcp.baseline:main"
+pcap-mcp-verify = "pcap_mcp.verify:main"
 
 [build-system]
 requires = ["hatchling"]

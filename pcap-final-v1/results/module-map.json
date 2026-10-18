@@ -1,0 +1,94 @@
+[
+  {
+    "file": "__init__.py",
+    "role": "包版本0.8.0。"
+  },
+  {
+    "file": "config.py",
+    "role": "环境变量、工具位置、允许目录、超时和输出预算。"
+  },
+  {
+    "file": "tshark.py",
+    "role": "解析路径、限制参数与文件体积、以参数数组和shell=False启动Wireshark、限制时间和输出；是外部解析器边界。"
+  },
+  {
+    "file": "analysis.py",
+    "role": "将协议、DNS、HTTP、TLS、TCP异常等解析结果整理为有边界的数据；启发式线索不等于攻击判决。"
+  },
+  {
+    "file": "security.py",
+    "role": "脱敏、提示注入模式检测、中和、信任标签；规则命中不等于已证明攻击意图或防御有效。"
+  },
+  {
+    "file": "server.py",
+    "role": "FastMCP stdio入口，注册12个工具，统一包装成功和错误结果；HTTP field模式进入provenance。"
+  },
+  {
+    "file": "agent.py",
+    "role": "模型选工具，控制器掌管固定抓包路径、工具预算、证据日志、参数验证和报告模式；guarded结束时直接程序生成报告。"
+  },
+  {
+    "file": "provenance.py",
+    "role": "把HTTP字段构建为带帧号、字段名、occurrence、存在性、展示值和转换来源的记录；不向模型输出原始未脱敏字段。"
+  },
+  {
+    "file": "evidence_io.py",
+    "role": "读取完整受保护工具信封，避免不必要的解析器依赖。"
+  },
+  {
+    "file": "claims.py",
+    "role": "只对显式、有限字段谓词做检查，不能判断任意自然语言。"
+  },
+  {
+    "file": "typed_report.py",
+    "role": "v2类型化最终回答的schema、请求、严格解析、核对和渲染；失败不修复。"
+  },
+  {
+    "file": "reporting.py",
+    "role": "直接从记录生成字段事实和有限来源类别；对模型解释与事实采取分开的发布策略。"
+  },
+  {
+    "file": "verify.py",
+    "role": "不问模型，从原抓包重提取HTTP字段和转换信息并比较，保留解析器版本。"
+  },
+  {
+    "file": "research.py",
+    "role": "structured/flat同值展示、标准摘要、检查点与审计记录。"
+  },
+  {
+    "file": "baseline.py",
+    "role": "早期重复Agent基线，衡量工具使用、引用形式和有限claims检查；不承接全部新报告模式。"
+  },
+  {
+    "file": "lineage.py",
+    "role": "冻结证据与配对案例、有限来源类别、门控和评分；保存输出后复用，防止把门控当成新生成。"
+  },
+  {
+    "file": "lineage_runner.py",
+    "role": "每个回放条件一次模型请求，随后离线复用同份提案比较各门控。"
+  },
+  {
+    "file": "reporting_study.py",
+    "role": "冻结开发/heldout报告研究、排程、模型条件及纯程序条件。"
+  },
+  {
+    "file": "reporting_agent_study.py",
+    "role": "真实MCP Agent研究，保存字段和源重提取；与冻结记录转写研究区分。"
+  },
+  {
+    "file": "frozen_prose.py",
+    "role": "冻结v3正文请求及格式/引用诊断，避免后续悄改旧请求。"
+  },
+  {
+    "file": "validation_cases.py",
+    "role": "生成有明确配方的合成PCAP及有限字段预期；预期不调用被测转换函数生成。"
+  },
+  {
+    "file": "validation_agent.py",
+    "role": "有预算的MCP观察循环，正文阶段分开执行。"
+  },
+  {
+    "file": "validation.py",
+    "role": "小批实际MCP与冻结正文验证、预算、回放、审阅模板和结果导出。"
+  }
+]

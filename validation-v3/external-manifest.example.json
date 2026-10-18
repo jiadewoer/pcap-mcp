@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "data_origin": "user_owned_real_capture_not_independently_labeled",
+  "cases": [
+    {
+      "id": "owned-http-01",
+      "capture": "owned-http-01.pcapng",
+      "goal": "检查 HTTP User-Agent 各 occurrence 的存在性、转换计数与来源标签，并说明不能从这些观察得出的结论。"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "pcap-final-release-validation-v1",
+  "entry_unique_checks": 14,
+  "entry_checks_passed": 14,
+  "entry_check_scope": "real MCP/tshark; synthetic captures; simulated Ollama; GBK default encoding simulated",
+  "core_modules_identical_to_verified_pc_runtime": 23,
+  "native_helper_files_identical_to_verified_pc_runner": 4,
+  "core_regression_reused": {
+    "checks": 386,
+    "scope": "previous Linux checks of identical 23 core source bytes; not rerun or added to new check count"
+  },
+  "parameter_stage_offline_checks_reused": {
+    "checks": 33,
+    "scope": "Windows HTTP fixture correction; prior Linux record; not counted as new release tests"
+  },
+  "user_actual_model_comparison": {
+    "requests": 16,
+    "A": "8/8",
+    "B": "8/8",
+    "matched_pairs": "8/8",
+    "rules_unique_goals": "4/8"
+  },
+  "real_model_calls_during_this_finalization": 0,
+  "native_Windows_final_entry_run_here": false,
+  "PowerShell_final_wrappers": "text-reviewed; native runtime unavailable",
+  "limitations": [
+    "one observation per exposed development cell",
+    "no general model advantage or automatic semantic-review claim",
+    "new final wrapper has simulated-model coverage, not a separate user-machine real-model run"
+  ],
+  "extracted_release_smoke_checks": {
+    "live_MCP_registry_tools": 12,
+    "program_all_protocols": "passed",
+    "HTTP_source_matched_records": 8,
+    "HTTP_program_facts": 88,
+    "fresh_process_saved_report": "passed",
+    "real_model_requests": 0
+  }
+}

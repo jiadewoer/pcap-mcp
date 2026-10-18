@@ -1,0 +1,4 @@
+Processing request of type ListToolsRequest
+Ready: 12 MCP tools; model requests: 0
+tshark: TShark (Wireshark) 4.2.2 (Git v4.2.2 packaged as 4.2.2-1.1build3).
+capinfos: Capinfos (Wireshark) 4.2.2 (Git v4.2.2 packaged as 4.2.2-1.1build3).

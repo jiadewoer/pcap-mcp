@@ -1,10 +1,11 @@
+import sys
 from pathlib import Path
 
 import pytest
 
-from pcap_mcp import config
+from pcap_mcp import config, tshark
 from pcap_mcp.config import Settings
-from pcap_mcp.tshark import PcapError, resolve_capture, validate_fields, validate_filter
+from pcap_mcp.tshark import PcapError, _run, resolve_capture, validate_fields, validate_filter
 
 
 def settings_for(directory: Path, **overrides) -> Settings:
@@ -15,6 +16,8 @@ def settings_for(directory: Path, **overrides) -> Settings:
         "max_file_mb": 1,
         "max_rows": 200,
         "timeout_s": 5,
+        "max_output_mb": 16,
+        "max_result_chars": 50_000,
         "redact": True,
     }
     values.update(overrides)
@@ -77,3 +80,41 @@ def test_empty_allowlist_denies_everything(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "_SETTINGS", settings_for(tmp_path, allowed_dirs=()))
     with pytest.raises(PcapError, match="denied by default"):
         resolve_capture(str(capture))
+
+
+def test_nonzero_exit_with_partial_stdout_is_an_error(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "_SETTINGS", settings_for(tmp_path))
+    with pytest.raises(PcapError, match="could not analyze"):
+        _run([sys.executable, "-c", "import sys; print('partial'); sys.exit(2)"])
+
+
+def test_subprocess_stdout_is_bounded(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "_SETTINGS", settings_for(tmp_path, max_output_mb=1))
+    with pytest.raises(PcapError, match="output exceeded"):
+        _run([sys.executable, "-c", "import sys; sys.stdout.write('x' * 1100000)"])
+
+
+def test_subprocess_timeout_terminates_child(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "_SETTINGS", settings_for(tmp_path, timeout_s=1))
+    with pytest.raises(PcapError, match="exceeded the 1s timeout"):
+        _run([sys.executable, "-c", "import time; time.sleep(10)"])
+
+
+def test_fields_keep_column_alignment_and_report_sampling(tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "_SETTINGS", settings_for(tmp_path, max_rows=2))
+    commands = []
+
+    def fake_run(args):
+        commands.append(args)
+        return "1\t10.0.0.1\n2\t\n3\t10.0.0.3\n"
+
+    monkeypatch.setattr(tshark, "_run", fake_run)
+    rows, truncated = tshark.fields(
+        tmp_path / "sample.pcap", ["frame.number", "ip.src"], display_filter="ip"
+    )
+    assert rows == [
+        {"frame.number": "1", "ip.src": "10.0.0.1"},
+        {"frame.number": "2", "ip.src": ""},
+    ]
+    assert truncated is True
+    assert commands[0][-6:] == ["-Y", "ip", "-e", "frame.number", "-e", "ip.src"]

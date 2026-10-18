@@ -1,0 +1,26 @@
+{
+  "kind": "exposed_development_cases_not_holdout",
+  "source_return_sha256": "faab05b51a40a2f1f7d3690109d8a46d1eccab55bbaf003a0dc8d625951d82c7",
+  "cases": [
+    {
+      "case_id": "duplicate-user-agent",
+      "file": "01.json",
+      "sha256": "b259d5bd1256c3700780712bae1ac18517657a6f1a7036cb58a4fb688df18452"
+    },
+    {
+      "case_id": "empty-user-agent",
+      "file": "02.json",
+      "sha256": "62ce03c377d9c95958a009c92640d6fcf0250a6773dcfd51fe34a5236f7b0f0b"
+    },
+    {
+      "case_id": "forged-role",
+      "file": "03.json",
+      "sha256": "5c96afbd75cff93d6eb6ca7fd88aed5767805313b74fbd66b5e6535669c7f12f"
+    },
+    {
+      "case_id": "mixed-requests",
+      "file": "04.json",
+      "sha256": "4085d78ed1076b7cbea19ea6e9998d4a2cb2be4d781a83b316ee0ae10a0141f4"
+    }
+  ]
+}
