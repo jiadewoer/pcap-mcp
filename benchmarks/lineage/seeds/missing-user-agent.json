@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "source": "user_supplied_0.6.0_pilot_B",
+  "capture_sha256": "a2e0a74f09cd7eed5ac0895d574f625d09bbfae7f7fcb4545092a5037481d8d7",
+  "upstream_evidence_file_sha256": "27e76a6de8015a5468ad95ff892342e4bed9d55e9b5470fba4fa9846133e30af",
+  "upstream_verification_file_sha256": "6bd5ec74c3537649bae486ffda68c74632069fe0df0c0f78160808ac39b7b3a7",
+  "upstream_verification": {
+    "schema_version": 1,
+    "capture_sha256": "a2e0a74f09cd7eed5ac0895d574f625d09bbfae7f7fcb4545092a5037481d8d7",
+    "capture_unchanged_during_verification": true,
+    "scope": "decoded_http_fields_and_transformations_not_intent_or_success",
+    "records": [
+      {
+        "reference": "E02/F4:http.request.method/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.host/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.request.uri/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.user_agent/0",
+        "matched": true,
+        "status": "matched"
+      }
+    ],
+    "record_count": 4,
+    "matched_count": 4,
+    "all_records_match": true,
+    "coverage": "only_exported_field_occurrences_not_entire_capture"
+  },
+  "record": {
+    "record_id": "F4:http.user_agent/0",
+    "frame_number": 4,
+    "frame_time_epoch": "1700000000.003000000",
+    "dissector_creator": "wireshark/4.6.2",
+    "field": "http.user_agent",
+    "occurrence": 0,
+    "present": false,
+    "value_basis": "tshark_decoded_field_not_wire_bytes",
+    "input_decoding": {
+      "tshark_display_replacement_characters": 0,
+      "header_envelope_removed": false,
+      "original_character_encoding_asserted": false
+    },
+    "display_value": "",
+    "injection_kinds": [],
+    "transformations": {
+      "redaction_enabled": true,
+      "redaction_changed": false,
+      "uri_suffix_removed": false,
+      "unicode_controls_removed": 0,
+      "middle_dots_inserted_by_server": 0,
+      "middle_dots_in_decoded_source": 0,
+      "neutralization_changed": false
+    }
+  }
+}

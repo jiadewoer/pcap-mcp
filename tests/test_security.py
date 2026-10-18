@@ -1,3 +1,5 @@
+import pytest
+
 from pcap_mcp.security import guard_output, redact, scan_injection
 
 
@@ -37,3 +39,19 @@ def test_redaction_removes_full_authorization_value():
     output = redact("Authorization: Bearer abc123def456")
     assert "abc123def456" not in output
     assert "<redacted:" in output
+
+
+@pytest.mark.parametrize(
+    "address",
+    [
+        "2001:db8::1",
+        "fe80::abcd",
+        "[2001:db8::1]:443",
+        "::ffff:192.0.2.99",
+        "fe80::1%eth0",
+    ],
+)
+def test_compressed_ipv6_is_redacted(address):
+    output = redact(f"peer={address}")
+    assert address not in output
+    assert "xxxx" in output

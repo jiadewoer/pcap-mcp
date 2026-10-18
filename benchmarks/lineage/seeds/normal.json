@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "source": "user_supplied_0.6.0_pilot_B",
+  "capture_sha256": "f4a6f2278b4ce33535fb624f10451d0b937692df19a3f948deea0aeb3cdd3e05",
+  "upstream_evidence_file_sha256": "cc9e08fe09e10ffc32f05afeaa8e72d802c1b5885898e4ad144394cc3d008080",
+  "upstream_verification_file_sha256": "1d28d0fcee618d0df3ebc79d1c0b5770379de83254f538debb56798e1fb9385c",
+  "upstream_verification": {
+    "schema_version": 1,
+    "capture_sha256": "f4a6f2278b4ce33535fb624f10451d0b937692df19a3f948deea0aeb3cdd3e05",
+    "capture_unchanged_during_verification": true,
+    "scope": "decoded_http_fields_and_transformations_not_intent_or_success",
+    "records": [
+      {
+        "reference": "E02/F4:http.request.method/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.host/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.request.uri/0",
+        "matched": true,
+        "status": "matched"
+      },
+      {
+        "reference": "E02/F4:http.user_agent/0",
+        "matched": true,
+        "status": "matched"
+      }
+    ],
+    "record_count": 4,
+    "matched_count": 4,
+    "all_records_match": true,
+    "coverage": "only_exported_field_occurrences_not_entire_capture"
+  },
+  "record": {
+    "record_id": "F4:http.user_agent/0",
+    "frame_number": 4,
+    "frame_time_epoch": "1700000000.003000000",
+    "dissector_creator": "wireshark/4.6.2",
+    "field": "http.user_agent",
+    "occurrence": 0,
+    "present": true,
+    "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+    "input_decoding": {
+      "tshark_display_replacement_characters": 0,
+      "header_envelope_removed": true,
+      "original_character_encoding_asserted": false
+    },
+    "display_value": "research-client/1.0",
+    "injection_kinds": [],
+    "transformations": {
+      "redaction_enabled": true,
+      "redaction_changed": false,
+      "uri_suffix_removed": false,
+      "unicode_controls_removed": 0,
+      "middle_dots_inserted_by_server": 0,
+      "middle_dots_in_decoded_source": 0,
+      "neutralization_changed": false
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "allowed_labels": [
+    "source_confusion",
+    "unsupported_encoding_or_intent",
+    "unsupported_success",
+    "counter_or_presence_contradiction",
+    "wrong_record",
+    "missing_specific_limitations",
+    "other"
+  ],
+  "instruction": "逐条对照 program-facts 与模型正文。approved 仅表示这次正文人工验收；pending 不计成功。",
+  "trials": [
+    {
+      "id": "group-001/explicit_json",
+      "response_sha256": "abe23201ccf4c18962cb693267efaa7883a417b0624b5ed38640a71a629effae",
+      "decision": "rejected",
+      "labels": [
+        "source_confusion",
+        "counter_or_presence_contradiction"
+      ],
+      "note": "转换计数已区分分析程序插入中点与解码来源中点，且控制字符移除为零；limitations[1] 仍称无法区分并称控制字符有影响，limitations[3] 又称不确定是否由控制字符移除产生。",
+      "reviewer": "assistant_semantic_review_2026-10-11"
+    },
+    {
+      "id": "group-001/explicit_compact_schema",
+      "response_sha256": "00a13ce3699040d3673c22ae0f226314125d3cfe5b7dcac3e6b18dbef3a432bc",
+      "decision": "rejected",
+      "labels": [
+        "source_confusion",
+        "counter_or_presence_contradiction"
+      ],
+      "note": "转换计数已区分分析程序插入中点与解码来源中点，且控制字符移除为零；limitations[1] 仍称无法区分并称控制字符有影响，limitations[3] 又称不确定是否由控制字符移除产生。",
+      "reviewer": "assistant_semantic_review_2026-10-11"
+    },
+    {
+      "id": "group-002/explicit_compact_schema",
+      "response_sha256": "bdc904aa17fe2d20a1d5d2c77aca64da52fe32ef057fb771548acf7983074b5b",
+      "decision": "rejected",
+      "labels": [
+        "other",
+        "source_confusion"
+      ],
+      "note": "hypotheses[2] 把中点分隔符插入写成可能的字符替换；已有23个程序插入、0个解码来源中点的记录仍被表述为未确定的来源，无法区分分析程序和远端行为的说法也没有限定到真正未知的原编码。",
+      "reviewer": "assistant_semantic_review_2026-10-11"
+    },
+    {
+      "id": "group-002/explicit_json",
+      "response_sha256": "bdc904aa17fe2d20a1d5d2c77aca64da52fe32ef057fb771548acf7983074b5b",
+      "decision": "rejected",
+      "labels": [
+        "other",
+        "source_confusion"
+      ],
+      "note": "hypotheses[2] 把中点分隔符插入写成可能的字符替换；已有23个程序插入、0个解码来源中点的记录仍被表述为未确定的来源，无法区分分析程序和远端行为的说法也没有限定到真正未知的原编码。",
+      "reviewer": "assistant_semantic_review_2026-10-11"
+    }
+  ],
+  "review_process": "assistant_assisted_review_not_independent_human_annotation"
+}

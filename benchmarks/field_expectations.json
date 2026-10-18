@@ -1,0 +1,30 @@
+{
+  "scope": "synthetic_wire_inputs_expectations_need_tshark_integration_validation",
+  "cases": {
+    "normal": {
+      "ua_present": true,
+      "dots_added": 0,
+      "controls_removed": 0
+    },
+    "plain-directive": {
+      "ua_present": true,
+      "dots_added": 31,
+      "controls_removed": 0
+    },
+    "literal-dots": {
+      "ua_present": true,
+      "dots_added": 0,
+      "source_dots": 1
+    },
+    "unicode-control": {
+      "ua_present": true,
+      "dots_added": 31,
+      "controls_removed": 1
+    },
+    "missing-user-agent": {
+      "ua_present": false,
+      "dots_added": 0,
+      "controls_removed": 0
+    }
+  }
+}

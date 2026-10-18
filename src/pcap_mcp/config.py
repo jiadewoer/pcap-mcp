@@ -57,9 +57,17 @@ class Settings:
     max_file_mb: int = field(default_factory=lambda: _positive_int("PCAP_MCP_MAX_FILE_MB", 200))
     max_rows: int = field(default_factory=lambda: _positive_int("PCAP_MCP_MAX_ROWS", 200))
     timeout_s: int = field(default_factory=lambda: _positive_int("PCAP_MCP_TIMEOUT_S", 60))
+    max_output_mb: int = field(default_factory=lambda: _positive_int("PCAP_MCP_MAX_OUTPUT_MB", 16))
+    max_result_chars: int = field(
+        default_factory=lambda: _positive_int("PCAP_MCP_MAX_RESULT_CHARS", 50_000)
+    )
     redact: bool = field(
         default_factory=lambda: os.getenv("PCAP_MCP_REDACT", "on").lower() != "off"
     )
+
+    def __post_init__(self) -> None:
+        if self.max_result_chars < 512:
+            raise ValueError("PCAP_MCP_MAX_RESULT_CHARS must be at least 512")
 
 
 _SETTINGS: Settings | None = None

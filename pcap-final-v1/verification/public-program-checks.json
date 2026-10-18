@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "input": "http",
+      "status": "observations_ready",
+      "published_tools": 5,
+      "model_attempts": 0
+    },
+    {
+      "input": "dns",
+      "status": "observations_ready",
+      "published_tools": 5,
+      "model_attempts": 0
+    },
+    {
+      "input": "tls",
+      "status": "observations_ready",
+      "published_tools": 5,
+      "model_attempts": 0
+    }
+  ],
+  "scope": "public input program checks; parser implementation unchanged by final CLI exit-code adjustment"
+}

@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import re
 import subprocess
+import threading
 from pathlib import Path
+from typing import BinaryIO
 
 from .config import get_settings
 
@@ -29,11 +31,11 @@ def resolve_capture(path_str: str) -> Path:
     try:
         path = path.resolve(strict=True)
     except OSError as exc:
-        raise PcapError(f"Capture does not exist or is inaccessible: {path_str}") from exc
+        raise PcapError("Capture does not exist or is inaccessible.") from exc
     if not path.is_file():
         raise PcapError("The capture path must be a regular file.")
     if path.suffix.lower() not in _ALLOWED_SUFFIXES:
-        raise PcapError(f"Unsupported capture type: {path.suffix}")
+        raise PcapError("Unsupported capture type; use .pcap, .pcapng, .cap, or .ntar.")
     if not any(_under(path, directory) for directory in settings.allowed_dirs):
         raise PcapError("The capture is outside the configured allowed directories.")
     size_mb = path.stat().st_size / 1024**2
@@ -67,27 +69,75 @@ def validate_fields(names: list[str]) -> list[str]:
 
 
 def _run(args: list[str]) -> str:
+    """Collect bounded command output, including on Windows where select() cannot read pipes."""
     settings = get_settings()
+    stdout_chunks: list[bytes] = []
+    stderr_chunks: list[bytes] = []
+    overflow = threading.Event()
+    reader_error = threading.Event()
+    timed_out = False
+
     try:
-        result = subprocess.run(
+        process = subprocess.Popen(
             args,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=settings.timeout_s,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             creationflags=_NO_WINDOW,
-            check=False,
             shell=False,
         )
-    except subprocess.TimeoutExpired as exc:
-        raise PcapError(f"Analysis exceeded the {settings.timeout_s}s timeout.") from exc
     except OSError as exc:
-        raise PcapError(f"Could not start Wireshark command: {exc}") from exc
-    if result.returncode != 0 and not result.stdout:
-        detail = (result.stderr or "unknown tshark error").strip()[:300]
-        raise PcapError(f"tshark failed: {detail}")
-    return result.stdout
+        raise PcapError("Could not start the Wireshark command.") from exc
+
+    def collect(stream: BinaryIO, chunks: list[bytes], limit: int) -> None:
+        size = 0
+        # A separate reader for each pipe prevents stderr from blocking stdout.
+        try:
+            while data := stream.read(64 * 1024):
+                size += len(data)
+                if size > limit:
+                    overflow.set()
+                    process.kill()
+                    return
+                chunks.append(data)
+        except OSError:
+            reader_error.set()
+            if process.poll() is None:
+                process.kill()
+
+    assert process.stdout is not None and process.stderr is not None
+    out_reader = threading.Thread(
+        target=collect,
+        args=(process.stdout, stdout_chunks, settings.max_output_mb * 1024**2),
+        daemon=True,
+    )
+    err_reader = threading.Thread(
+        target=collect, args=(process.stderr, stderr_chunks, 64 * 1024), daemon=True
+    )
+    out_reader.start()
+    err_reader.start()
+    try:
+        process.wait(timeout=settings.timeout_s)
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        process.kill()
+        process.wait()
+    finally:
+        out_reader.join()
+        err_reader.join()
+        process.stdout.close()
+        process.stderr.close()
+
+    if timed_out:
+        raise PcapError(f"Analysis exceeded the {settings.timeout_s}s timeout.")
+    if overflow.is_set():
+        raise PcapError("Wireshark output exceeded the configured size limit.")
+    if reader_error.is_set():
+        raise PcapError("Could not read the Wireshark command output.")
+    if process.returncode != 0:
+        # The diagnostic may contain a path or attacker-controlled packet content.
+        raise PcapError("Wireshark could not analyze this capture or display filter.")
+    return b"".join(stdout_chunks).decode("utf-8", errors="replace")
 
 
 def capinfos(path: Path) -> dict[str, str]:
@@ -142,3 +192,92 @@ def fields(
         parts += [""] * (len(names) - len(parts))
         rows.append(dict(zip(names, parts[: len(names)], strict=False)))
     return rows, truncated
+
+
+def http_field_rows(
+    path: Path,
+    field_names: list[str],
+    display_filter: str,
+    limit: int,
+) -> tuple[list[dict[str, list[str]]], bool]:
+    """Select HTTP PDML fields; explicitly decode available field bytes as strict UTF-8.
+
+    Wireshark's HTTP string display can replace every high-bit byte with U+FFFD.
+    PDML gives both the display and field bytes. Header field byte ranges include
+    their header name and CRLF; remove that envelope before decoding. These are
+    dissector field bytes, potentially from a reassembled data source.
+    """
+    import xml.etree.ElementTree as ET
+
+    names = validate_fields(field_names)
+    allowed = {
+        "frame.number",
+        "frame.time_epoch",
+        "http.request.method",
+        "http.host",
+        "http.request.uri",
+        "http.user_agent",
+    }
+    if not set(names) <= allowed:
+        raise PcapError("HTTP evidence uses only its fixed metadata fields.")
+    cap = min(max(1, limit), get_settings().max_rows)
+    text = _run(
+        [
+            get_settings().tshark,
+            "-n",
+            "-r",
+            str(path),
+            "-T",
+            "pdml",
+            "-J",
+            "frame http",
+            "-Y",
+            validate_filter(display_filter),
+        ]
+    )
+    try:
+        if "<!DOCTYPE" in text or "<!ENTITY" in text:
+            raise ValueError("DTD is not accepted")
+        root = ET.fromstring(text)
+        if root.tag != "pdml":
+            raise ValueError("Wrong document type")
+        packets = root.findall("packet")
+        rows = []
+        for packet in packets[:cap]:
+            row: dict[str, list[str]] = {name: [] for name in names}
+            row["__tshark_creator"] = [root.get("creator", "unknown")]
+            for node in packet.iter("field"):
+                name = node.get("name", "")
+                if name not in row:
+                    continue
+                display = node.get("show", "")
+                value = display
+                basis = "tshark_display_only"
+                envelope = False
+                if name.startswith("http.") and node.get("value") is not None:
+                    try:
+                        raw = bytes.fromhex(node.get("value", ""))
+                        if name in {"http.host", "http.user_agent"}:
+                            header = b"host" if name == "http.host" else b"user-agent"
+                            label, sep, contents = raw.partition(b":")
+                            if not sep or label.lower() != header:
+                                raise ValueError("Unexpected header byte range")
+                            raw = contents.removesuffix(b"\r\n").strip(b" \t")
+                            envelope = True
+                        value = raw.decode("utf-8", errors="strict")
+                        basis = "strict_utf8_interpretation_of_pdml_field_bytes"
+                    except (ValueError, UnicodeDecodeError):
+                        # Never guess back from U+FFFD or decode malformed hex permissively.
+                        basis = "tshark_display_only_utf8_unavailable"
+                        value = display
+                        envelope = False
+                row[name].append(value)
+                row.setdefault(name + ".__basis", []).append(basis)
+                row.setdefault(name + ".__replacement_chars", []).append(
+                    str(display.count("\ufffd"))
+                )
+                row.setdefault(name + ".__header_envelope", []).append(str(envelope).lower())
+            rows.append(row)
+    except (ET.ParseError, ValueError, TypeError) as exc:
+        raise PcapError("Wireshark returned unsupported HTTP PDML field output.") from exc
+    return rows, len(packets) > cap

@@ -1,0 +1,767 @@
+{
+  "schema_version": 1,
+  "suite": "reporting-heldout-v1",
+  "cases": [
+    {
+      "id": "h00",
+      "family": "compound-signals",
+      "records": [
+        {
+          "record_id": "F19:http.user_agent/0",
+          "frame_number": 19,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 ····· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 3,
+            "middle_dots_in_decoded_source": 2,
+            "unicode_controls_removed": 1
+          }
+        }
+      ],
+      "slots": {
+        "F19:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 ····· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 3,
+          "transformations.middle_dots_in_decoded_source": 2,
+          "transformations.unicode_controls_removed": 1,
+          "middle_dot_origin": "both",
+          "control_removal_observed": "yes"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h01",
+      "family": "compound-signals",
+      "records": [
+        {
+          "record_id": "F22:http.user_agent/0",
+          "frame_number": 22,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 ····· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 3,
+            "middle_dots_in_decoded_source": 2,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F22:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 ····· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 3,
+          "transformations.middle_dots_in_decoded_source": 2,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "both",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h02",
+      "family": "one-sided-missing",
+      "records": [
+        {
+          "record_id": "F25:http.user_agent/0",
+          "frame_number": 25,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F25:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "unknown",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h03",
+      "family": "one-sided-missing",
+      "records": [
+        {
+          "record_id": "F28:http.user_agent/0",
+          "frame_number": 28,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "unicode_controls_removed": 1
+          }
+        }
+      ],
+      "slots": {
+        "F28:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.unicode_controls_removed": 1,
+          "middle_dot_origin": "unknown",
+          "control_removal_observed": "yes"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h04",
+      "family": "invalid-counter-types",
+      "records": [
+        {
+          "record_id": "F31:http.user_agent/0",
+          "frame_number": 31,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": true,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": -1
+          }
+        }
+      ],
+      "slots": {
+        "F31:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "middle_dot_origin": "unknown",
+          "control_removal_observed": "unknown"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h05",
+      "family": "invalid-counter-types",
+      "records": [
+        {
+          "record_id": "F34:http.user_agent/0",
+          "frame_number": 34,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": "0",
+            "middle_dots_in_decoded_source": 2,
+            "unicode_controls_removed": 1.0
+          }
+        }
+      ],
+      "slots": {
+        "F34:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_in_decoded_source": 2,
+          "middle_dot_origin": "unknown",
+          "control_removal_observed": "unknown"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h06",
+      "family": "multiple-occurrences",
+      "records": [
+        {
+          "record_id": "F37:http.user_agent/0",
+          "frame_number": 37,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 2,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": 0
+          }
+        },
+        {
+          "record_id": "F37:http.user_agent/1",
+          "frame_number": 37,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 1,
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 1,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F37:http.user_agent/0": "ua0",
+        "F37:http.user_agent/1": "ua1"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 2,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "analysis_program",
+          "control_removal_observed": "no"
+        },
+        "ua1": {
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 1,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "decoded_source",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h07",
+      "family": "multiple-occurrences",
+      "records": [
+        {
+          "record_id": "F40:http.user_agent/1",
+          "frame_number": 40,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 1,
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 2,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": 0
+          }
+        },
+        {
+          "record_id": "F40:http.user_agent/0",
+          "frame_number": 40,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 1,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F40:http.user_agent/0": "ua0",
+        "F40:http.user_agent/1": "ua1"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 1,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "decoded_source",
+          "control_removal_observed": "no"
+        },
+        "ua1": {
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 2,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "analysis_program",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h08",
+      "family": "mixed-availability",
+      "records": [
+        {
+          "record_id": "F43:http.user_agent/0",
+          "frame_number": 43,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": 0
+          }
+        },
+        {
+          "record_id": "F43:http.user_agent/1",
+          "frame_number": 43,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 1,
+          "present": true,
+          "display_value": "holdout-client-1/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false
+          }
+        }
+      ],
+      "slots": {
+        "F43:http.user_agent/0": "ua0",
+        "F43:http.user_agent/1": "ua1"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "none",
+          "control_removal_observed": "no"
+        },
+        "ua1": {
+          "present": true,
+          "display_value": "holdout-client-1/2.0",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "middle_dot_origin": "unknown",
+          "control_removal_observed": "unknown"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h09",
+      "family": "mixed-availability",
+      "records": [
+        {
+          "record_id": "F46:http.user_agent/0",
+          "frame_number": 46,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 0
+          }
+        },
+        {
+          "record_id": "F46:http.user_agent/1",
+          "frame_number": 46,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 1,
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 1,
+            "middle_dots_in_decoded_source": 1,
+            "unicode_controls_removed": 1
+          }
+        }
+      ],
+      "slots": {
+        "F46:http.user_agent/0": "ua0",
+        "F46:http.user_agent/1": "ua1"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "middle_dot_origin": "none",
+          "control_removal_observed": "unknown"
+        },
+        "ua1": {
+          "present": true,
+          "display_value": "holdout-client/2.0 ·· trace",
+          "injection_kinds": [
+            "instruction override"
+          ],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 1,
+          "transformations.middle_dots_in_decoded_source": 1,
+          "transformations.unicode_controls_removed": 1,
+          "middle_dot_origin": "both",
+          "control_removal_observed": "yes"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h10",
+      "family": "encoding-versus-lineage",
+      "records": [
+        {
+          "record_id": "F49:http.user_agent/0",
+          "frame_number": 49,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "tshark_pdml_display_no_raw_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 2,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 0,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F49:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0",
+          "injection_kinds": [],
+          "value_basis": "tshark_pdml_display_no_raw_bytes",
+          "input_decoding.tshark_display_replacement_characters": 2,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 0,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "none",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    },
+    {
+      "id": "h11",
+      "family": "encoding-versus-lineage",
+      "records": [
+        {
+          "record_id": "F52:http.user_agent/0",
+          "frame_number": 52,
+          "frame_time_epoch": "1700000123.000000000",
+          "dissector_creator": "synthetic-record-boundary/v1",
+          "field": "http.user_agent",
+          "occurrence": 0,
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding": {
+            "tshark_display_replacement_characters": 0,
+            "header_envelope_removed": true
+          },
+          "transformations": {
+            "redaction_changed": false,
+            "uri_suffix_removed": false,
+            "middle_dots_inserted_by_server": 0,
+            "middle_dots_in_decoded_source": 1,
+            "unicode_controls_removed": 0
+          }
+        }
+      ],
+      "slots": {
+        "F52:http.user_agent/0": "ua0"
+      },
+      "gold": {
+        "ua0": {
+          "present": true,
+          "display_value": "holdout-client/2.0 · trace",
+          "injection_kinds": [],
+          "value_basis": "strict_utf8_interpretation_of_pdml_field_bytes",
+          "input_decoding.tshark_display_replacement_characters": 0,
+          "input_decoding.header_envelope_removed": true,
+          "transformations.redaction_changed": false,
+          "transformations.uri_suffix_removed": false,
+          "transformations.middle_dots_inserted_by_server": 0,
+          "transformations.middle_dots_in_decoded_source": 1,
+          "transformations.unicode_controls_removed": 0,
+          "middle_dot_origin": "decoded_source",
+          "control_removal_observed": "no"
+        }
+      },
+      "scope": "curated_synthetic_record_transfer_not_new_packet_reextraction"
+    }
+  ],
+  "declaration": "Hand-authored inputs and lineage answers; no checker-generated gold. Fact truth is limited to declared record leaves.",
+  "scope": "New compound/availability/type/occurrence boundary families; overlaps underlying counter primitives with development. Not an external blind benchmark.",
+  "selection_rule": "Use development results only to select availability/completeness prompt; never retune on heldout outcomes."
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "producer": "program-from-field-records/v1",
+  "source_payload_sha256": {
+    "E02": "45606eb21597cfaec79b7c0e277c8a390ada09400cb6b04ac16350021327c614"
+  },
+  "facts": [
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "display_value",
+      "value": "holdout-client/2.0 · trace"
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "injection_kinds",
+      "value": []
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "input_decoding.header_envelope_removed",
+      "value": true
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "input_decoding.tshark_display_replacement_characters",
+      "value": 0
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "present",
+      "value": true
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "transformations.middle_dots_in_decoded_source",
+      "value": 0
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "transformations.redaction_changed",
+      "value": false
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "transformations.unicode_controls_removed",
+      "value": 0
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "transformations.uri_suffix_removed",
+      "value": false
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "value_basis",
+      "value": "strict_utf8_interpretation_of_pdml_field_bytes"
+    }
+  ],
+  "attributions": [
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "middle_dot_origin",
+      "value": "unknown"
+    },
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "control_removal_observed",
+      "value": "no"
+    }
+  ],
+  "unavailable": [
+    {
+      "record": "E02/F25:http.user_agent/0",
+      "property": "transformations.middle_dots_inserted_by_server",
+      "reason": "missing"
+    }
+  ],
+  "excluded_evidence": [],
+  "prose_status": "not_requested",
+  "model_prose": {
+    "schema_version": 1,
+    "hypotheses": [],
+    "limitations": []
+  },
+  "unknown_prose_references": [],
+  "verification_scope": "matches_saved_records_not_source_reextraction_or_semantic_truth"
+}

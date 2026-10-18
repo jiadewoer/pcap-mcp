@@ -1,0 +1,25 @@
+{
+  "release": "pcap-mcp-final-20261018",
+  "verification_environment": {
+    "python": "3.12.14",
+    "platform": "Linux",
+    "dependencies": {
+      "mcp": "1.30.0",
+      "pydantic": "2.14.1",
+      "jsonschema": "4.26.0",
+      "openai": "2.54.0",
+      "pytest": "8.4.2"
+    },
+    "tshark": "4.2.2"
+  },
+  "user_execution_evidence": {
+    "OS": "Windows",
+    "parser": "Wireshark 4.6.2",
+    "Ollama": "0.24.0",
+    "model": "qwen3:8b",
+    "context": 8192
+  },
+  "installation": "reuse existing project .venv and Wireshark; no dependency installation or model download is performed",
+  "native_Windows_release_wrapper_run_here": false,
+  "native_PowerShell_run_here": false
+}

@@ -5,10 +5,11 @@ from __future__ import annotations
 import re
 import statistics
 from collections import Counter, defaultdict
+from math import ceil, isfinite
 from pathlib import Path
 from typing import Any
 
-from .tshark import capinfos, fields, stat
+from .tshark import PcapError, capinfos, fields, stat
 
 _PHS_LINE = re.compile(r"^(\s*)(\S+)\s+frames:(\d+)\s+bytes:(\d+)")
 
@@ -81,7 +82,7 @@ def summarize(path: Path) -> dict[str, Any]:
 def conversations(path: Path, proto: str = "tcp", top_n: int = 20) -> dict[str, Any]:
     protocol = proto.lower()
     if protocol not in {"tcp", "udp", "ip"}:
-        protocol = "tcp"
+        raise PcapError("Protocol must be tcp, udp, or ip.")
     top_n = min(max(int(top_n), 1), 100)
     transport_fields = [] if protocol == "ip" else [f"{protocol}.srcport", f"{protocol}.dstport"]
     packet_rows, truncated = fields(
@@ -145,16 +146,24 @@ def dns_queries(path: Path) -> dict[str, Any]:
             "dns.a",
             "dns.aaaa",
             "dns.flags.rcode",
+            "dns.flags.response",
         ],
         display_filter="dns",
     )
-    names = Counter(row["dns.qry.name"] for row in rows if row.get("dns.qry.name"))
+    names = Counter(
+        row["dns.qry.name"]
+        for row in rows
+        if row.get("dns.qry.name") and row.get("dns.flags.response") == "0"
+    )
     return {
         "observed_dns_packets": len(rows),
         "truncated": truncated,
         "unique_names_in_sample": len(names),
         "top_names": names.most_common(20),
-        "nxdomain_count_in_sample": sum(row.get("dns.flags.rcode") == "3" for row in rows),
+        "nxdomain_count_in_sample": sum(
+            row.get("dns.flags.response") == "1" and row.get("dns.flags.rcode") == "3"
+            for row in rows
+        ),
         "queries": rows[:50],
     }
 
@@ -175,6 +184,10 @@ def http_requests(path: Path) -> dict[str, Any]:
         ],
         display_filter="http.request",
     )
+    # Query strings commonly contain session tokens, including names unknown to the redactor.
+    for row in rows:
+        if uri := row.get("http.request.uri"):
+            row["http.request.uri"] = uri.split("?", 1)[0].split("#", 1)[0]
     return {
         "observed_requests": len(rows),
         "truncated": truncated,
@@ -238,7 +251,7 @@ def tcp_anomalies(path: Path) -> dict[str, Any]:
 
 
 def handshake_failures(path: Path) -> dict[str, Any]:
-    syn, syn_truncated = fields(
+    events, truncated = fields(
         path,
         [
             "frame.number",
@@ -246,63 +259,84 @@ def handshake_failures(path: Path) -> dict[str, Any]:
             "ip.dst",
             "ipv6.src",
             "ipv6.dst",
+            "tcp.srcport",
             "tcp.dstport",
             "tcp.stream",
+            "tcp.flags.syn",
+            "tcp.flags.ack",
+            "tcp.flags.reset",
         ],
-        display_filter="tcp.flags.syn==1 && tcp.flags.ack==0",
-        limit=2000,
+        display_filter="tcp.flags.syn==1 || tcp.flags.reset==1",
+        limit=6000,
     )
-    synack, synack_truncated = fields(
-        path, ["tcp.stream"], display_filter="tcp.flags.syn==1 && tcp.flags.ack==1", limit=2000
-    )
-    rst, rst_truncated = fields(
-        path, ["tcp.stream", "frame.number"], display_filter="tcp.flags.reset==1", limit=2000
-    )
-    answered = {row["tcp.stream"] for row in synack if row.get("tcp.stream")}
-    reset = {row["tcp.stream"] for row in rst if row.get("tcp.stream")}
-    attempts: defaultdict[str, list[dict[str, str]]] = defaultdict(list)
-    for row in syn:
-        if row.get("tcp.stream"):
-            attempts[row["tcp.stream"]].append(row)
+    attempts: dict[str, dict[str, Any]] = {}
+    for row in events:
+        stream = row.get("tcp.stream", "")
+        src, dst = _src(row), _dst(row)
+        if not stream or not src or not dst:
+            continue
+        if row.get("tcp.flags.syn") == "1" and row.get("tcp.flags.ack") == "0":
+            if stream not in attempts:
+                attempts[stream] = {
+                    "src": src,
+                    "dst": dst,
+                    "sport": row.get("tcp.srcport", ""),
+                    "dport": row.get("tcp.dstport", ""),
+                    "syn_count": 1,
+                    "state": "pending",
+                }
+            elif src == attempts[stream]["src"] and dst == attempts[stream]["dst"]:
+                attempts[stream]["syn_count"] += 1
+            continue
+        attempt = attempts.get(stream)
+        if not attempt or src != attempt["dst"] or dst != attempt["src"]:
+            continue
+        if row.get("tcp.srcport") != attempt["dport"] or row.get("tcp.dstport") != attempt["sport"]:
+            continue
+        if row.get("tcp.flags.syn") == "1" and row.get("tcp.flags.ack") == "1":
+            attempt["state"] = "synack"
+        elif row.get("tcp.flags.reset") == "1" and attempt["state"] == "pending":
+            attempt["state"] = "reset"
     refused: list[dict[str, Any]] = []
-    timeout: list[dict[str, Any]] = []
+    unanswered: list[dict[str, Any]] = []
     succeeded = 0
-    for stream, packets in attempts.items():
+    for stream, attempt in attempts.items():
         item = {
             "tcp_stream": stream,
-            "dst": _dst(packets[0]),
-            "dport": packets[0].get("tcp.dstport"),
-            "syn_count": len(packets),
+            "dst": attempt["dst"],
+            "dport": attempt["dport"],
+            "syn_count": attempt["syn_count"],
         }
-        if stream in answered:
+        if attempt["state"] == "synack":
             succeeded += 1
-        elif stream in reset:
+        elif attempt["state"] == "reset":
             refused.append(item)
         else:
-            timeout.append(item)
+            unanswered.append(item)
     verdict: list[str] = []
     if refused:
         verdict.append(
-            f"{len(refused)} connection(s) were reset: the port may be closed or rejected."
+            f"{len(refused)} stream(s) received a server RST before any observed SYN-ACK."
         )
-    if timeout:
+    if unanswered:
         verdict.append(
-            f"{len(timeout)} connection(s) had no reply: consider filtering or path failure."
+            f"{len(unanswered)} stream(s) had no observed reply; the capture may be incomplete."
         )
-    if not refused and not timeout:
-        verdict.append("Every observed TCP handshake received a SYN-ACK.")
+    if not refused and not unanswered:
+        verdict.append("Every observed initial SYN was followed by a server SYN-ACK.")
     return {
         "attempts": len(attempts),
         "succeeded": succeeded,
         "refused_by_rst": refused[:20],
-        "no_response": timeout[:20],
-        "truncated": syn_truncated or synack_truncated or rst_truncated,
+        "no_response": unanswered[:20],
+        "truncated": truncated,
         "verdict": verdict,
     }
 
 
 def _percentile(sorted_values: list[float], percentile: float) -> float:
-    index = max(0, min(len(sorted_values) - 1, int(len(sorted_values) * percentile) - 1))
+    """Nearest-rank percentile for an already sorted, nonempty sample."""
+    index = max(0, min(len(sorted_values) - 1, ceil(len(sorted_values) * percentile) - 1))
     return sorted_values[index]
 
 
@@ -316,7 +350,9 @@ def rtt_stats(path: Path, tcp_stream: int | None = None) -> dict[str, Any]:
     values: list[float] = []
     for row in rows:
         try:
-            values.append(float(row["tcp.analysis.ack_rtt"]) * 1000)
+            value = float(row["tcp.analysis.ack_rtt"]) * 1000
+            if isfinite(value) and value >= 0:
+                values.append(value)
         except (ValueError, KeyError):
             continue
     if not values:
@@ -428,14 +464,19 @@ def tls_posture(path: Path) -> dict[str, Any]:
             "ipv6.src",
             "ipv6.dst",
             "tls.handshake.version",
-            "tls.handshake.ciphersuite",
+            "tls.handshake.extensions.supported_version",
+            "tls.handshake.type",
             "tls.handshake.extensions_server_name",
         ],
         display_filter="tls.handshake.type==2 || tls.handshake.type==1",
         limit=2000,
     )
+    # ClientHello advertises capabilities; only ServerHello selects a version.
+    server_hellos = [row for row in rows if row.get("tls.handshake.type") == "2"]
     versions = Counter(
-        row["tls.handshake.version"] for row in rows if row.get("tls.handshake.version")
+        row.get("tls.handshake.extensions.supported_version") or row["tls.handshake.version"]
+        for row in server_hellos
+        if row.get("tls.handshake.extensions.supported_version") or row.get("tls.handshake.version")
     )
     legacy = {"0x0300": "SSL 3.0", "0x0301": "TLS 1.0", "0x0302": "TLS 1.1"}
     sni = Counter(
@@ -444,7 +485,8 @@ def tls_posture(path: Path) -> dict[str, Any]:
         if row.get("tls.handshake.extensions_server_name")
     )
     return {
-        "handshakes": len(rows),
+        "handshakes": len(server_hellos),
+        "observed_hello_packets": len(rows),
         "truncated": truncated,
         "version_distribution": versions.most_common(),
         "outdated_versions": [
@@ -463,7 +505,7 @@ def cleartext_credentials(path: Path) -> dict[str, Any]:
         display_filter=(
             'http.authorization || ftp.request.command == "PASS" || telnet '
             '|| pop.request.command == "PASS" || imap.request contains "LOGIN" '
-            '|| http.request.method == "POST" && http.content_type contains "urlencoded"'
+            '|| (http.request.method == "POST" && http.content_type contains "urlencoded")'
         ),
         limit=500,
     )
@@ -481,22 +523,74 @@ def cleartext_credentials(path: Path) -> dict[str, Any]:
     }
 
 
-_HEX_PAYLOAD_FIELDS = {"tcp.payload", "data.data", "http.file_data"}
+_SAFE_DISPLAY_FIELDS = {
+    "frame.number",
+    "frame.time_relative",
+    "frame.time_epoch",
+    "frame.len",
+    "frame.protocols",
+    "ip.src",
+    "ip.dst",
+    "ipv6.src",
+    "ipv6.dst",
+    "tcp.stream",
+    "tcp.srcport",
+    "tcp.dstport",
+    "udp.srcport",
+    "udp.dstport",
+    "dns.qry.type",
+    "dns.flags.rcode",
+    "http.request.method",
+    "tls.handshake.version",
+    "tls.handshake.extensions.supported_version",
+}
+_SAFE_FILTER_FIELDS = _SAFE_DISPLAY_FIELDS | {
+    "ip",
+    "ipv6",
+    "tcp",
+    "udp",
+    "dns",
+    "http.request",
+    "tls",
+    "vlan",
+    "ip.addr",
+    "ipv6.addr",
+    "tcp.port",
+    "udp.port",
+    "tcp.flags.syn",
+    "tcp.flags.ack",
+    "tcp.flags.reset",
+    "tls.handshake.type",
+    "dns.qry.name",
+    "http.host",
+}
+_FILTER_WORDS = {"and", "or", "not", "contains", "in", "true", "false"}
+_PROTOCOL_FILTER_FIELDS = {"ip", "ipv6", "tcp", "udp", "dns", "http.request", "tls", "vlan"}
+_QUOTED_FILTER_TEXT = re.compile(r'"(?:\\.|[^"\\])*"')
+_FILTER_IDENTIFIER = re.compile(r"[A-Za-z_][A-Za-z0-9_.]*")
 
 
-def _decode_hex_payload(value: str) -> str | None:
-    compact = value.replace(":", "")
-    if not compact or len(compact) % 2 or not re.fullmatch(r"[0-9a-fA-F]+", compact):
-        return None
-    decoded = bytes.fromhex(compact).decode("utf-8", errors="replace")
-    return decoded if decoded.strip() else None
+def _validate_custom_filter(expression: str) -> None:
+    """Deny raw-byte predicates, which otherwise act as a payload guessing oracle."""
+    if "[" in expression or "]" in expression or "'" in expression:
+        raise PcapError("Use metadata fields and double-quoted values in display filters.")
+    without_strings = _QUOTED_FILTER_TEXT.sub(" ", expression)
+    without_strings = re.sub(r"\b0x[0-9a-fA-F]+\b", "0", without_strings)
+    if '"' in without_strings:
+        raise PcapError("Display filter contains an unterminated quoted value.")
+    for match in _FILTER_IDENTIFIER.finditer(without_strings):
+        word = match.group(0).lower()
+        if word not in _SAFE_FILTER_FIELDS and word not in _FILTER_WORDS:
+            raise PcapError("Display filter refers to a field outside approved metadata.")
+        if word in _PROTOCOL_FILTER_FIELDS:
+            suffix = without_strings[match.end() :].lstrip().lower()
+            if suffix.startswith(("contains", "matches", "==", "!=", "<", ">")):
+                raise PcapError("Raw protocol content tests are not allowed.")
 
 
 def display_filter(path: Path, expression: str, names: list[str]) -> dict[str, Any]:
+    if not set(names) <= _SAFE_DISPLAY_FIELDS:
+        raise PcapError("Only approved packet metadata fields may be extracted.")
+    _validate_custom_filter(expression)
     rows, truncated = fields(path, names, expression)
-    for row in rows:
-        for name in names:
-            if name in _HEX_PAYLOAD_FIELDS and (value := row.get(name)):
-                if decoded := _decode_hex_payload(value):
-                    row[f"{name}.decoded_text"] = decoded
     return {"filter": expression, "rows": rows, "truncated": truncated}

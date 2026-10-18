@@ -1,0 +1,18 @@
+{
+  "scope": "saved_real_v3_wire_requests_not_rebuilt_from_implementation",
+  "source_protocol_sha256": "a66ff6fae1ef413b49d43e7336e1545dd5e39e063c3702e16b2d27cf9640dd09",
+  "requests": [
+    {
+      "arm": "explicit_json",
+      "file": "explicit_json.json",
+      "sha256": "7f595436052427f15aba859a91f4b9e503736bb0286ab1bfc185cc285b510d74",
+      "source": "group-001/explicit_json/request.json"
+    },
+    {
+      "arm": "explicit_compact_schema",
+      "file": "explicit_compact_schema.json",
+      "sha256": "d253c01357756a4fd55ce09acd156aafe817751fdecdc3c68a6cb24f695f3cb9",
+      "source": "group-001/explicit_compact_schema/request.json"
+    }
+  ]
+}
